@@ -10,7 +10,3 @@ cron.schedule(time, () => {
     console.log('Done running cron job')
   })
 })
-
-pulliHRIS.sync().then(() => {
-  console.log('Done running cron job')
-})

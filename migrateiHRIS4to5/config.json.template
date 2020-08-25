@@ -10,7 +10,7 @@
     "password": "hapi"
   },
   "sync": {
-    "cronTime": "*/1 * * * *",
+    "cronTime": "*/15 * * * *",
     "lastSyncTime": "1970-01-01T00:00:00",
     "maxBundleSize": "200"
   }
