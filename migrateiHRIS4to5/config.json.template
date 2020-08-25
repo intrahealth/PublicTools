@@ -1,0 +1,16 @@
+{
+  "ihris4": {
+    "baseURL": "http://localhost/index.php/FHIR",
+    "username": "i2ce_admin",
+    "password": "password"
+  },
+  "ihris5": {
+    "baseURL": "http://localhost:8080/hapi/fhir",
+    "username": "hapi",
+    "password": "hapi"
+  },
+  "sync": {
+    "lastSyncTime": "2020-08-25T20:44:04",
+    "maxBundleSize": "200"
+  }
+}
