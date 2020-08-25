@@ -1,8 +1,9 @@
 const cron = require('node-cron');
 const pulliHRIS = require('./pulliHRIS')
+const config = require('./config')
 
 // run every 15 minutes
-let time = '*/1 * * * *';
+let time = config.get("sync:cronTime")
 cron.schedule(time, () => {
   console.log('Tasks scheduled to run with cron time ' + time);
   pulliHRIS.sync().then(() => {
