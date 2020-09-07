@@ -39,7 +39,7 @@ module.exports = {
                 url: data.resource.resourceType + '/' + data.resource.id,
               },
             });
-            if (bundle.entry.length === config.get("sync:maxBundleSize")) {
+            if (bundle.entry.length >= config.get("sync:maxBundleSize")) {
               let tmpBundle = {
                 ...bundle,
               };
