@@ -45,6 +45,7 @@
       </v-card>
     </v-dialog>
     <v-btn color="success" @click="warnPopulate = true">Generate Report</v-btn>
+    <br><br>Practitioners sharing phone numbers
     <v-data-table
       :headers="headers"
       :items="contactsSharingPhone"
