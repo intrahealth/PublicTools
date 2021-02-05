@@ -12,9 +12,10 @@ module.exports = {
     return new Promise((resolve, reject) => {
 
       let resources = [
-        'Basic',
-        'Practitioner',
-        'PractitionerRole',
+//        'Basic',
+//        'Practitioner',
+//        'PractitionerRole',
+        // 'Organization',
         'Location'
       ];
       let errorOccured = false
@@ -89,10 +90,10 @@ function getResourceFromiHRIS(resource, callback) {
   url.addQuery('_since', lastSync)
   url.addQuery('_format', 'json');
   url = url.toString();
-  console.log(url)
   console.info(
     `Getting data for resource ${resource} from server ${config.get('ihris4:baseURL')}`
   );
+  url = 'http://localhost:8081/dhis2/fhir/Location?_id=7709f587-103e-4450-b42f-4839570a412c&_revinclude:recurse=Location:partof'
   async.whilst(
     callback => {
       return callback(null, url !== false);
@@ -142,16 +143,13 @@ function getResourceFromiHRIS(resource, callback) {
       });
     },
     err => {
-      console.info(
-        `Done Getting data for resource ${resource} from server ${config.get('ihris4:baseURL')}`
-      );
+      console.info(`Done Getting data for resource ${resource} from server ${config.get('ihris4:baseURL')}`);
       return callback(err, resourceData);
     }
   );
 }
 
 function saveResource(bundle, callback) {
-  console.info('Saving resource data');
   const url = URI(config.get('ihris5:baseURL')).toString();
   const options = {
     url,
@@ -175,7 +173,6 @@ function saveResource(bundle, callback) {
       console.log(JSON.stringify(body, 0, 2))
       return callback(true);
     }
-    console.info('Resource(s) data saved successfully');
     callback(err, body);
   });
 }

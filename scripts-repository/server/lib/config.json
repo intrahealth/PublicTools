@@ -1,0 +1,20 @@
+{
+  "server": {
+    "hostname": "0.0.0.0",
+    "port": 3004
+  },
+  "elasticsearch": {
+    "username": "",
+    "password": "",
+    "base": "http://localhost:9200"
+  },
+  "fhir": {
+    "username": "",
+    "password": "",
+    "base": "http://localhost:8081/hapi_kenya/fhir"
+  },
+  "rapidpro": {
+    "token": "428feabdf24c59f9d4083123c7c7b2c5c84f7bfd",
+    "base": "http://localhost:8001"
+  }
+}

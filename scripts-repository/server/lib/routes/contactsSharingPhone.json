@@ -1,0 +1,62 @@
+[{
+        "name": "Esther Ogweno Akoth",
+        "phone": ["+254728935260"],
+        "isFromRP": "Yes",
+        "id": "301fe3dc-ada4-4ad5-a3f7-0cabf4de4506",
+        "shares": [
+          {
+            "name": "John Onam Mika",
+            "phone": ["00728935260"],
+            "isFromRP": "No",
+            "id": "8dc99a08-d8c8-3882-9ab3-463b6f316b3e"
+          }
+        ]
+      }, {
+        "name": "Paul Kasera Okech",
+        "phone": ["+254728488574"],
+        "isFromRP": "No",
+        "id": "6fadd031-9223-484b-8281-a279341c96d1",
+        "shares": [
+          {
+            "name": "Linner Chepchirchir Koech",
+            "phone": ["+2540728488574"],
+            "isFromRP": "No",
+            "id": "877fe5e9-13ae-38b7-b614-02c3d6495429"
+          }
+        ]
+      }, {
+          "name": "George Vincent. Egesa Wandera",
+          "isFromRP": "No",
+          "phone": [
+            "00723201791"
+          ],
+          "id": "ed391aeb-79ee-3a2f-b52e-93032eecc5c3",
+        "shares": [
+          {
+            "name": "George Vincent. Egesa Wandera",
+            "isFromRP": "No",
+            "id": "f6236640-82f9-4379-96c8-9201183bc3c0",
+            "phone": [
+              "+254723201791"
+            ]
+          }
+        ]
+      }, {
+        "shares": [
+          {
+            "name": "John Waweru Gitonga",
+            "id": "124a8d85-fdb2-4bce-abec-b55c6d23712a",
+            "isFromRP": "Yes",
+            "phone": [
+              "+254711910429"
+            ]
+          }
+        ],
+        "name": "John Waweru Gitonga",
+        "phone": [
+          "00711910429"
+        ],
+        "id": "12083011-dc61-32b0-a7e0-eee162420907",
+        "isFromRP": "No"
+      }
+      ]
