@@ -46,6 +46,12 @@
     </v-dialog>
     <v-btn color="success" @click="warnPopulate = true">Generate Report</v-btn>
     <br><br>Practitioners sharing phone numbers
+    <v-text-field
+      name="name"
+      label="Search"
+      v-model="search"
+      append-icon="mdi-magnify"
+    ></v-text-field>
     <v-data-table
       :headers="headers"
       :items="contactsSharingPhone"
@@ -54,6 +60,7 @@
       item-key="id"
       show-expand
       single-expand
+      :search="search"
     >
       <template
         slot="items"
@@ -87,6 +94,7 @@
 export default {
   data: () => {
     return {
+      search: '',
       warnPopulate: false,
       loading: false,
       contactsSharingPhone: [],
