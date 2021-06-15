@@ -2,8 +2,6 @@ const request = require('request');
 const async = require('async');
 const URI = require('urijs');
 const isJSON = require('is-json');
-const moment = require('moment')
-const fs = require("fs");
 const config = require('./config')
 const lastSync = config.get('sync:lastSyncTime')
 
@@ -71,13 +69,8 @@ module.exports = {
         if(errorOccured) {
           return reject()
         }
-        let runsLastSync = moment()
-          .subtract('10', 'minutes')
-          .format('Y-MM-DDTHH:mm:ss');
-        updateConfigFile(["sync", "lastSyncTime"], runsLastSync, () => {
-          console.log('Done Synchronizing data');
-          return resolve()
-        })
+        console.log('Done Synchronizing data');
+        return resolve()
       });
     })
   }
@@ -93,7 +86,6 @@ function getResourceFromiHRIS(resource, callback) {
   console.info(
     `Getting data for resource ${resource} from server ${config.get('ihris4:baseURL')}`
   );
-  url = 'http://localhost:8081/dhis2/fhir/Location?_id=7709f587-103e-4450-b42f-4839570a412c&_revinclude:recurse=Location:partof'
   async.whilst(
     callback => {
       return callback(null, url !== false);
@@ -184,22 +176,5 @@ function setNestedKey(obj, path, value, callback) {
   }
   setNestedKey(obj[path[0]], path.slice(1), value, () => {
     return callback();
-  });
-}
-
-function updateConfigFile (path, newValue, callback) {
-  const pathString = path.join(':');
-  config.set(pathString, newValue);
-  console.log('Updating config file');
-  const configFile = `${__dirname}/config.json`;
-  const configData = require(configFile);
-  setNestedKey(configData, path, newValue, () => {
-    fs.writeFile(configFile, JSON.stringify(configData, 0, 2), (err) => {
-      if (err) {
-        throw err;
-      }
-      console.log('Done updating config file');
-      return callback();
-    });
   });
 }
