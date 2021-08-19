@@ -31,6 +31,26 @@ module.exports = {
             if (!data.resource || !data.resource.resourceType) {
               return nxtEntry();
             }
+            //clean coding system
+            if(data.resource.resourceType === 'PractitionerRole' && Array.isArray(data.resource.code)) {
+              for(let codeIndex in data.resource.code) {
+                if(Array.isArray(data.resource.code[codeIndex].coding)) {
+                  for(let codingIndex in data.resource.code[codeIndex].coding) {
+                    if(!res.resource.code[codeIndex].coding[codingIndex].code) {
+                      continue
+                    }
+                    if(data.resource.code[codeIndex].coding[codingIndex].code.startsWith('job|')) {
+                      data.resource.code[codeIndex].coding[codingIndex].system = 'http://ihris.org/fhir/CodeSystem/ihris-job'
+                      if(data.resource.code[codeIndex].text) {
+                        data.resource.code[codeIndex].coding[codingIndex].display = data.resource.code[codeIndex].text
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            //end of cleaning code
+
             bundle.entry.push({
               resource: data.resource,
               request: {

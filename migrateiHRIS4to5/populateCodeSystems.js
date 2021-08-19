@@ -1,6 +1,7 @@
 const axios = require('axios')
 const URI = require('urijs')
 const async = require('async')
+const lodash = require('lodash')
 
 const config = require('./config')
 const lastSync = config.get('sync:lastSyncTime')
@@ -23,7 +24,7 @@ const CodeSystemTemplate = {
   "concept": []
 }
 
-const populateJobs = () => {
+const populateCodes = () => {
   return new Promise((resolve) => {
     let jobCodeSystem = {}
     let cadreCodeSystem = {}
@@ -31,7 +32,7 @@ const populateJobs = () => {
       job: (callback) => {
         getCodeSystem('ihris-job').then((codeSyst) => {
           if(!codeSyst.concept) {
-            jobCodeSystem = CodeSystemTemplate
+            jobCodeSystem = lodash.cloneDeep(CodeSystemTemplate)
             jobCodeSystem.id = 'ihris-job'
             jobCodeSystem.url = 'http://ihris.org/fhir/CodeSystem/ihris-job'
             jobCodeSystem.name = 'iHRISJob'
@@ -54,7 +55,7 @@ const populateJobs = () => {
       cadre: (callback) => {
         getCodeSystem('ihris-cadre').then((codeSyst) => {
           if(!codeSyst.concept) {
-            cadreCodeSystem = CodeSystemTemplate
+            cadreCodeSystem = lodash.cloneDeep(CodeSystemTemplate)
             cadreCodeSystem.id = 'ihris-cadre'
             cadreCodeSystem.url = 'http://ihris.org/fhir/CodeSystem/ihris-cadre'
             cadreCodeSystem.name = 'iHRISCadre'
@@ -72,7 +73,7 @@ const populateJobs = () => {
       let url = URI(config.get('ihris5:baseURL'))
         .segment('Basic')
         .addQuery('_profile', 'http://ihris.org/fhir/StructureDefinition/iHRISPosition')
-        .addQuery('_since', lastSync)
+        .addQuery('_lastUpdated', 'ge' + lastSync)
         .toString()
 
       async.whilst(
@@ -91,6 +92,10 @@ const populateJobs = () => {
             },
           }).then((response) => {
             const promises = []
+            if(!response.data.entry || response.data.entry.length === 0) {
+              url = false
+              return callback(null, false);
+            }
             for(let pos of response.data.entry) {
               promises.push(new Promise((resolve) => {
                 let posDet = pos.resource.extension && pos.resource.extension.find((ext) => {
@@ -279,6 +284,4 @@ const getCodeSystem = (id) => {
   })
 }
 
-populateJobs().catch((err) => {
-  console.log(err);
-})
+module.exports = populateCodes

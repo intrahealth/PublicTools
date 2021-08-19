@@ -1,0 +1,19 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "logs/.92dbc1bb1054ab2ea62de2aa4b562eed02c5d927-audit.json",
+    "files": [
+        {
+            "date": 1613492859891,
+            "name": "logs/tasis-2021-02-16-19.log",
+            "hash": "686d113e3c94e1249eb4e6fef00392f5"
+        },
+        {
+            "date": 1613531428047,
+            "name": "logs/tasis-2021-02-17-06.log",
+            "hash": "1a1908879a248980718d74cf040d8b5e"
+        }
+    ]
+}
